@@ -1,0 +1,50 @@
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment / secrets
+.env
+env
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+# Backups / archives
+*.zip
+*.tar
+*.tar.gz
+*.bak
+*_backup
+backups/
+backup/
+old/
+archive/
+
+# Server/account files
+.cpanel/
+.softaculous/
+mail/
+logs/
+tmp/
+ssl/
+etc/
+
+# Private or generated data
+private/
+uploads/
+writable/
+cache/
+error_log
+*.log
+
+# Dependency folders
+node_modules/
+vendor/
+
+# Database dumps
+*.sql
+*.sqlite
+*.db
