@@ -2,7 +2,7 @@
 
 Static portfolio website for Deadhang Labor LLC, built for GitHub Pages deployment.
 
-**GitHub Pages:** https://thecrewblueprint-glitch.github.io/
+**GitHub Pages:** https://thecrewblueprint-glitch.github.io/deadhanglaborllc/
 
 ## Copyright
 
