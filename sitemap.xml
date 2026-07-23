@@ -25,4 +25,19 @@
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://deadhanglaborllc.com/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://deadhanglaborllc.com/cookies.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://deadhanglaborllc.com/terms.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
