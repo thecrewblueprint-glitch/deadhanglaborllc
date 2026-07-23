@@ -2,6 +2,12 @@
 
 Static portfolio website for Deadhang Labor LLC, built for GitHub Pages deployment.
 
+## Copyright
+
+© 2026 Deadhang Labor LLC. All Rights Reserved.
+
+The source code, branding, graphics, images, documentation, and website content in this repository are proprietary and may not be copied, redistributed, modified, or reused without prior written permission from Deadhang Labor LLC.
+
 ## Deployment
 
 This repository deploys from the `main` branch using GitHub Actions and GitHub Pages.
