@@ -2,6 +2,8 @@
 
 Static portfolio website for Deadhang Labor LLC, built for GitHub Pages deployment.
 
+**GitHub Pages:** https://thecrewblueprint-glitch.github.io/
+
 ## Copyright
 
 © 2026 Deadhang Labor LLC. All Rights Reserved.
@@ -12,12 +14,17 @@ The source code, branding, graphics, images, documentation, and website content 
 
 This repository deploys from the `main` branch using GitHub Actions and GitHub Pages.
 
-Required Pages settings:
+**Current Status:** CNAME removed for testing (custom domain temporarily disconnected).
+
+Required Pages settings (when restoring custom domain):
 
 1. Go to **Settings → Pages**.
-2. Set **Source** to **GitHub Actions**.
-3. Confirm the custom domain is `deadhanglaborllc.com`.
-4. Enable **Enforce HTTPS** after DNS and certificate validation complete.
+2. Set **Source** to **Deploy from a branch** with `main` selected.
+3. Add custom domain `deadhanglaborllc.com`.
+4. Restore the CNAME file with contents: `deadhanglaborllc.com`
+5. In Cloudflare: Set up CNAME DNS record pointing to `thecrewblueprint-glitch.github.io` with Proxy status **Proxied (orange cloud)**.
+6. In Cloudflare: Set SSL/TLS to **Full** or **Full (strict)** (not Flexible).
+7. Enable **Enforce HTTPS** after DNS and certificate validation complete.
 
 ## Repository Structure
 
@@ -40,7 +47,6 @@ Required Pages settings:
 ├── site.webmanifest
 ├── robots.txt
 ├── sitemap.xml
-├── CNAME
 ├── .nojekyll
 └── .github/workflows/pages.yml
 ```
