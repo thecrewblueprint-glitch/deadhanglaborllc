@@ -68,30 +68,6 @@ function closeLightbox() {
   lastFocusedElement?.focus();
 }
 
-// Add Country Thunder Wisconsin documentation to the Outdoor Festival gallery.
-(function addCountryThunderWisconsinPortfolioItems() {
-  const outdoorSection = Array.from(document.querySelectorAll(".portfolio-section")).find(
-    (section) => section.querySelector("h3")?.textContent.trim() === "Outdoor Festival"
-  );
-  const grid = outdoorSection?.querySelector(".portfolio-grid");
-
-  if (!grid || grid.querySelector('[data-portfolio-id="country-thunder-wisconsin-backstage"]')) return;
-
-  grid.insertAdjacentHTML(
-    "beforeend",
-    `
-      <button class="portfolio-item portfolio-lightbox-trigger" type="button" data-portfolio-id="country-thunder-wisconsin-backstage" data-full="images/country-thunder-wisconsin-backstage.jpg" data-caption="Backstage production view at Country Thunder Wisconsin, showing stage truss, LED video walls, structural systems, and support infrastructure during festival operations.">
-        <img alt="Backstage view of stage truss, LED video walls, and production infrastructure at Country Thunder Wisconsin" loading="lazy" src="images/country-thunder-wisconsin-backstage.jpg" />
-        <span class="portfolio-caption">Country Thunder Wisconsin – Backstage Production</span>
-      </button>
-      <button class="portfolio-item portfolio-lightbox-trigger" type="button" data-portfolio-id="country-thunder-wisconsin-main-stage" data-full="images/country-thunder-wisconsin-main-stage.jpg" data-caption="Main-stage audience area at sunset during Country Thunder Wisconsin, showing seating, barricade, runway, cabling, and festival-site infrastructure.">
-        <img alt="Sunset view of the main-stage audience area, seating, barricade, and runway at Country Thunder Wisconsin" loading="lazy" src="images/country-thunder-wisconsin-main-stage.jpg" />
-        <span class="portfolio-caption">Country Thunder Wisconsin – Main Stage</span>
-      </button>
-    `
-  );
-})();
-
 document.querySelectorAll(".portfolio-lightbox-trigger").forEach((trigger) => {
   trigger.addEventListener("click", () => openLightbox(trigger));
   trigger.addEventListener("keydown", (e) => {
@@ -118,35 +94,17 @@ document.addEventListener("keydown", (event) => {
 
 // Cookie notice
 (function () {
-  if (localStorage.getItem("cookieAck")) return;
-
-  const notice = document.createElement("div");
-  notice.className = "cookie-notice";
-  notice.setAttribute("role", "region");
-  notice.setAttribute("aria-label", "Cookie notice");
-
-  const message = document.createElement("p");
-  message.append(
-    document.createTextNode(
-      "This site uses essential cookies and browser storage for basic functionality only. No tracking or advertising cookies are used. "
-    )
-  );
-
-  const learnMore = document.createElement("a");
-  learnMore.href = "cookies.html";
-  learnMore.textContent = "Learn more";
-  message.append(learnMore);
-
-  const dismiss = document.createElement("button");
-  dismiss.type = "button";
-  dismiss.className = "cookie-notice-dismiss";
-  dismiss.textContent = "Got it";
-
-  notice.append(message, dismiss);
+  if (localStorage.getItem('cookieAck')) return;
+  var notice = document.createElement('div');
+  notice.className = 'cookie-notice';
+  notice.setAttribute('role', 'region');
+  notice.setAttribute('aria-label', 'Cookie notice');
+  notice.innerHTML =
+    '<p>This site uses essential cookies and browser storage for basic functionality only. No tracking or advertising cookies are used. <a href="cookies.html">Learn more</a></p>' +
+    '<button type="button" class="cookie-notice-dismiss">Got it</button>';
   document.body.appendChild(notice);
-
-  dismiss.addEventListener("click", () => {
+  notice.querySelector('.cookie-notice-dismiss').addEventListener('click', function () {
     notice.remove();
-    localStorage.setItem("cookieAck", "1");
+    localStorage.setItem('cookieAck', '1');
   });
-})();
+}());
