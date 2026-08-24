@@ -57,3 +57,7 @@ Required Pages settings (when restoring custom domain):
 - Do not add contractor tools, uploads, private documents, API keys, `.env` files, database dumps, or client records here.
 - Future contractor portals or admin dashboards should live in separate private repositories.
 - Use relative links for internal pages and assets where possible.
+
+## Governance
+
+This repository is governed by `50yearroadmap`'s `companies/deadhang-labor/` folder. Write access to that governance requires an explicit owner grant — see `CLAUDE.md` for session details. This repo is website-only; a full local governance package isn't needed here (see `50yearroadmap`'s `governance/GOVERNANCE_ROLLOUT_TODO.md`).
