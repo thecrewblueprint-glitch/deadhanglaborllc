@@ -60,4 +60,6 @@ Required Pages settings (when restoring custom domain):
 
 ## Governance
 
+Any AI agent working in this repository: read `AGENTS.md` first.
+
 This repository is governed by `50yearroadmap`'s `companies/deadhang-labor/` folder. Write access to that governance requires an explicit owner grant — see `CLAUDE.md` for session details. This repo is website-only; a full local governance package isn't needed here (see `50yearroadmap`'s `governance/GOVERNANCE_ROLLOUT_TODO.md`).
