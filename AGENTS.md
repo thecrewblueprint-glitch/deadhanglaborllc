@@ -25,6 +25,23 @@ That exemption is about process weight, not about skipping orientation —
 read this file before making any change, and don't bypass it just
 because the repository is small.
 
+## Orchestrator operating-layer pointer
+
+Every repository-attached session also enters the lightweight top-level
+operating/continuity contract in `50yearroadmap/AGENT_ORIENTATION.md` and
+`50yearroadmap/governance/CONTINUITY_CONTRACT.md`.
+
+- Routine deterministic website work stays local. Roadmapdev is optional and
+  relevance-triggered for consequential, cross-system, uncertain, conflicting,
+  or explicitly requested analysis; its output is advisory, not write authority.
+- Supabase project `Roadmap` is the durable shared memory/evidence/research plane
+  when available. A provider without direct Supabase access uses the canonical
+  `50yearroadmap` bridge/read-through continuity path and must not ask the owner
+  for credentials merely to continue.
+- This pointer grants no cross-repository writes and does not change this
+  repository's lightweight governance, public-only boundary, or live-site
+  deployment rules.
+
 ## Write access
 
 Write access to this repository's governing folder inside
