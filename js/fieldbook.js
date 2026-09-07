@@ -1,4 +1,17 @@
 // Deadhang Labor LLC — Field Book interactions
+// Small branch-only responsive overrides are injected here so the experimental
+// visual system remains self-contained while the owner reviews it.
+const responsiveFixes = document.createElement('style');
+responsiveFixes.textContent = `
+  @media (max-width: 720px) {
+    .nav-inner > span:empty { display: none; }
+    .site-shell > div[style*="grid-template-columns:minmax(0,.7fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+`;
+document.head.appendChild(responsiveFixes);
+
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
