@@ -2,33 +2,22 @@
 
 ## Read AGENTS.md first
 
-This repository's orientation lives in `AGENTS.md` at the repository
-root — read it before doing anything else here. It covers what this
-repository is, its governance boundary with `50yearroadmap`, write
-access, and content boundaries.
+This repository's orientation lives in `AGENTS.md` at the repository root — read it before doing anything else here. It covers what this repository is, its governance boundary with `50yearroadmap`, PR-first change control, write access, deployment behavior, and content boundaries.
 
 ## Never use AskUserQuestion (or any multiple-choice/decision-card UI)
 
-The owner's standing preference, applies here too: converse in plain text
-only. If blocked on a decision only the owner can make, ask directly in a
-normal chat message — don't render it as a card with selectable options.
+The owner's standing preference applies here too: converse in plain text only. If blocked on a decision only the owner can make, ask directly in a normal chat message — don't render it as a card with selectable options.
 
 ## Paired with 50yearroadmap
 
-This repo (the public Deadhang Labor LLC marketing site) is governed by
-`50yearroadmap`'s `companies/deadhang-labor/` folder. Every session should
-have both repos attached. If this is a fresh session: read
-`50yearroadmap`'s `AGENT_ORIENTATION.md` first, then `AGENTS.md` in this
-repo, then `companies/deadhang-labor/14_sops.md` for the operating
-checklist. Write access to `50yearroadmap` requires an explicit ask and
-grant, even at session-end — see `governance/WRITE_ACCESS_PROTOCOL.md`
-there.
+This repo (the public Deadhang Labor LLC marketing site) is governed by `50yearroadmap`'s `companies/deadhang-labor/` folder. Every session should have both repos attached. If this is a fresh session: read `50yearroadmap/AGENT_ORIENTATION.md` first, then `AGENTS.md` in this repo, then `companies/deadhang-labor/14_sops.md` for the operating checklist.
 
-## Governance package: resolved, lightweight path (2026-08-24)
+Write access and cross-repository switching follow `50yearroadmap/governance/WRITE_ACCESS_PROTOCOL.md`.
 
-`50yearroadmap` audited this repository and confirmed a full local
-governance package isn't warranted — see `AGENTS.md` for the summary and
-`50yearroadmap`'s `governance/GOVERNANCE_ROLLOUT_TODO.md` for the full
-record. This replaces the previous "pending a dedicated owner-directed
-pass" note — that pass happened 2026-08-24 and concluded the lightweight
-path is correct.
+## Governance path: lightweight + PR-first
+
+The 2026-08-24 review correctly concluded that this website does not need a duplicate full local governance package, ledger, or heavy multi-agent process.
+
+The owner revised the change-control portion on 2026-09-07: because `main` is production state, routine and substantive website changes now use a work branch and pull request before merge. See `AGENTS.md` for the controlling local rule.
+
+The Pages workflow deploys accepted `main` after a PR is merged, rather than deploying every direct push to `main`.
