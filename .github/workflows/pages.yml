@@ -1,8 +1,9 @@
 name: Deploy static site to GitHub Pages
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
+    types: [closed]
   workflow_dispatch:
 
 permissions:
@@ -16,13 +17,16 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout accepted main
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
