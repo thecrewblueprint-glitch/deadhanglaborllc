@@ -25,6 +25,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="css/style.css?v=20260908-2" rel="stylesheet"/>
 <link href="css/home-redesign.css?v=20260908-4" rel="stylesheet"/>
+<style>
+  .home-contact-resume { padding: 1.5rem; }
+  .home-contact-resume-card {
+    width: min(100%, 1240px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1.25fr .75fr;
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.13);
+    border-top: 3px solid #7c3aa0;
+    background: linear-gradient(145deg,#171a22,#0f1117);
+  }
+  .home-contact-resume-main,
+  .home-contact-resume-actions { padding: clamp(1.5rem,4vw,2.75rem); }
+  .home-contact-resume-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .75rem;
+    border-left: 1px solid rgba(255,255,255,.1);
+    background: rgba(8,9,12,.35);
+  }
+  .home-contact-resume-label {
+    margin-bottom: .65rem;
+    color: #f59e0b;
+    font-family: var(--font-display);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .home-contact-resume-main h2 { font-size: clamp(2.4rem,5vw,4.4rem); }
+  .home-contact-resume-role { margin: .45rem 0 .2rem; color:#f6f7f9; font-weight:600; }
+  .home-contact-resume-meta { margin: 0 0 1.15rem; color:#8e96a3; }
+  .home-contact-resume-email {
+    display: inline-block;
+    color:#d3a7e2;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem,2.3vw,1.35rem);
+    font-weight:700;
+    overflow-wrap:anywhere;
+  }
+  .home-contact-resume-pending {
+    display:flex;
+    min-height:48px;
+    align-items:center;
+    justify-content:center;
+    padding:.8rem 1rem;
+    border:1px solid rgba(255,255,255,.15);
+    color:#777f8d;
+    font-family:var(--font-display);
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    background:#0d0f14;
+  }
+  @media (max-width: 700px) {
+    .home-contact-resume { padding:.75rem; }
+    .home-contact-resume-card { grid-template-columns:1fr; }
+    .home-contact-resume-actions { border-left:0; border-top:1px solid rgba(255,255,255,.1); }
+    .home-contact-resume-main,
+    .home-contact-resume-actions { padding:1.35rem; }
+    .home-contact-resume-actions .btn { width:100%; }
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,9 +109,7 @@
 <body class="home-v2">
 <nav aria-label="Primary navigation" class="site-nav">
   <div class="nav-inner">
-    <a aria-label="Deadhang Labor LLC home" class="nav-logo" href="index.html">
-      <img alt="Deadhang Labor LLC" class="nav-logo-img" src="images/icons/footer.png">
-    </a>
+    <a aria-label="Deadhang Labor LLC home" class="nav-logo" href="index.html">DEADHANG LABOR LLC</a>
     <button aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation" class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a aria-current="page" class="active" href="index.html">Home</a></li>
@@ -160,7 +225,7 @@
         </div>
         <div class="home-v2-proof-side">
           <button class="home-v2-shot portfolio-lightbox-trigger" type="button" aria-label="Open larger preview: Kacey Musgraves arena load-in" data-full="https://djrzj431udyjd.cloudfront.net/portfolio-4.jpg" data-caption="Kacey Musgraves Deeper Well World Tour scenic set elements during arena load-in."><img src="https://djrzj431udyjd.cloudfront.net/portfolio-4.jpg" alt="Kacey Musgraves arena load-in" loading="lazy" /></button>
-          <button class="home-v2-shot portfolio-lightbox-trigger" type="button" aria-label="Open larger preview: ELO arena production" data-full="https://djrzj431udyjd.cloudfront.net/portfolio-5.jpg" data-caption="Production-floor setup during an ELO arena show."><img src="https://djrzj431udyjd.cloudfront.net/portfolio-5.jpg" alt="Production-floor setup during an ELO arena show" loading="lazy" /></button>
+          <button class="home-v2-shot portfolio-lightbox-trigger" type="button" aria-label="Open larger preview: ELO arena production" data-full="https://djrzj431udyjd.cloudfront.net/portfolio-5.jpg" data-caption="Production-floor setup during an ELO arena show."><img src="https://djrzj431udyjd.cloudfront.net/portfolio-5.jpg" alt="ELO arena production" loading="lazy" /></button>
         </div>
       </div>
       <div style="margin-top:1.25rem"><a class="btn btn-outline" href="portfolio.html">Full Portfolio</a></div>
@@ -182,6 +247,22 @@
           <div class="home-v2-about-point"><span>03</span><div><strong>Safety matters</strong><p>If it’s unsafe, unclear, or not my call, I stop and get the right person.</p></div></div>
         </div>
         <a class="btn btn-outline" href="about.html">More About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-contact-resume" aria-labelledby="contact-resume-title">
+    <div class="home-contact-resume-card">
+      <div class="home-contact-resume-main">
+        <div class="home-contact-resume-label">Contact / Resume</div>
+        <h2 id="contact-resume-title">Aaron Bowman</h2>
+        <p class="home-contact-resume-role">Live Event Production Labor</p>
+        <p class="home-contact-resume-meta">Phoenix Metro, Arizona · Available for U.S. travel</p>
+        <a class="home-contact-resume-email" href="mailto:aaron@deadhanglaborllc.com">aaron@deadhanglaborllc.com</a>
+      </div>
+      <div class="home-contact-resume-actions">
+        <a class="btn btn-primary btn-lg" href="contact.html">Contact</a>
+        <span class="home-contact-resume-pending" aria-disabled="true">Resume PDF · Add File</span>
       </div>
     </div>
   </section>
