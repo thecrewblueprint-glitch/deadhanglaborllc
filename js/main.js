@@ -2,6 +2,22 @@
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
 
+// Temporary header treatment while the Deadhang logo is being replaced.
+const navLogo = document.querySelector(".nav-logo");
+if (navLogo) {
+  const navLogoImage = navLogo.querySelector(".nav-logo-img");
+  navLogoImage?.remove();
+  navLogo.textContent = "DEADHANG LABOR LLC";
+  navLogo.setAttribute("aria-label", "Deadhang Labor LLC home");
+  navLogo.style.color = "#f6f7f9";
+  navLogo.style.fontFamily = "var(--font-display)";
+  navLogo.style.fontWeight = "700";
+  navLogo.style.fontSize = "0.95rem";
+  navLogo.style.letterSpacing = "0.08em";
+  navLogo.style.textTransform = "uppercase";
+  navLogo.style.whiteSpace = "nowrap";
+}
+
 // Keep the homepage hero emphasis neutral instead of oversized purple.
 const heroEmphasis = document.querySelector(".hero h1 em");
 if (heroEmphasis) {
