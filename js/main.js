@@ -2,6 +2,13 @@
 const navToggle = document.getElementById("navToggle");
 const navLinks = document.getElementById("navLinks");
 
+// Keep the homepage hero emphasis neutral instead of oversized purple.
+const heroEmphasis = document.querySelector(".hero h1 em");
+if (heroEmphasis) {
+  heroEmphasis.style.color = "var(--color-heading-soft)";
+  heroEmphasis.style.textShadow = "none";
+}
+
 function closeNavigation() {
   if (!navToggle || !navLinks) return;
   navLinks.classList.remove("open");
