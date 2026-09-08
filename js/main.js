@@ -115,6 +115,21 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Activate the homepage resume control using the original PDF bytes stored in resume-pdf.js.
+const resumePlaceholder = document.querySelector('.home-contact-resume-pending');
+if (resumePlaceholder) {
+  const resumeButton = document.createElement('button');
+  resumeButton.id = 'resumePdfButton';
+  resumeButton.type = 'button';
+  resumeButton.className = 'btn btn-outline btn-lg';
+  resumeButton.textContent = 'Resume PDF';
+  resumePlaceholder.replaceWith(resumeButton);
+
+  const resumeScript = document.createElement('script');
+  resumeScript.src = 'js/resume-pdf.js?v=20260908-1';
+  document.body.appendChild(resumeScript);
+}
+
 // Cookie notice
 (function () {
   if (localStorage.getItem('cookieAck')) return;
