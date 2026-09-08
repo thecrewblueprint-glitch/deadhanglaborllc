@@ -1,8 +1,9 @@
-name: Deploy redesign branch to GitHub Pages
+name: Deploy static site to GitHub Pages
 
 on:
-  push:
+  pull_request_target:
     branches: ["main"]
+    types: [closed]
   workflow_dispatch:
 
 permissions:
@@ -11,35 +12,27 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages-redesign"
-  cancel-in-progress: true
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout redesign branch
+      - name: Checkout accepted main
         uses: actions/checkout@v4
         with:
-          ref: redesign/purple-amber-industrial-2026-09-07
-
+          ref: main
       - name: Setup Pages
         uses: actions/configure-pages@v5
-
-      - name: Upload redesign artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: deadhang-redesign-pages
           path: '.'
-
-      - name: Let branch-source Pages deployment finish first
-        run: sleep 45
-
-      - name: Deploy redesign to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: deadhang-redesign-pages
