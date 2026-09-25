@@ -1,0 +1,141 @@
+/* Deadhang Labor LLC — portfolio carousel
+   One strip of every portfolio photo. Without JavaScript the strip is a plain
+   horizontal scroller; js/portfolio-carousel.js adds .is-ready and switches it
+   to the big-photo window (2 small · 1 big · 2 small, clamped at the ends). */
+
+.portfolio-carousel { position: relative; }
+
+.portfolio-carousel-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+/* No-JS fallback: native horizontal scroll through every photo. */
+.portfolio-carousel-track {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  gap: .75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: .5rem;
+}
+
+.portfolio-carousel-track .portfolio-carousel-slide {
+  flex: 0 0 min(78%, 420px);
+  scroll-snap-align: center;
+}
+
+/* Enhanced carousel */
+.portfolio-carousel.is-ready .portfolio-carousel-track {
+  height: clamp(300px, 40vw, 540px);
+  align-items: center;
+  overflow: hidden;
+  scroll-snap-type: none;
+  padding-bottom: 0;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 62%;
+  opacity: .62;
+  cursor: pointer;
+  transition: flex-grow .45s ease, height .45s ease, opacity .3s ease;
+}
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide.is-out { display: none; }
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide:hover { opacity: .9; }
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide.is-active {
+  flex-grow: 3.2;
+  height: 100%;
+  opacity: 1;
+  cursor: zoom-in;
+}
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide.is-active::after {
+  border-color: var(--amber-500);
+}
+
+.portfolio-carousel.is-ready .portfolio-carousel-slide img {
+  height: 100%;
+  aspect-ratio: auto;
+  -webkit-user-drag: none;
+}
+
+/* Captions show once, under the big photo, instead of on every tile. */
+.portfolio-carousel.is-ready .portfolio-carousel-slide .portfolio-caption { display: none; }
+
+.portfolio-carousel-arrow {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--white);
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), opacity var(--transition);
+}
+
+.portfolio-carousel-arrow:hover:not(:disabled) { border-color: var(--amber-500); color: var(--amber-400); }
+.portfolio-carousel-arrow:disabled { opacity: .3; cursor: default; }
+
+.portfolio-carousel-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--amber-400);
+  font-family: var(--font-display);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.portfolio-carousel-count { color: var(--muted); }
+
+.portfolio-carousel-caption {
+  min-height: 1.6em;
+  margin: .4rem 0 0;
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.portfolio-carousel-progress {
+  height: 3px;
+  margin-top: 1rem;
+  background: var(--border);
+}
+
+.portfolio-carousel-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--purple-600), var(--amber-500));
+  transition: width .45s ease;
+}
+
+@media (max-width: 640px) {
+  .portfolio-carousel-stage { gap: .4rem; }
+  .portfolio-carousel.is-ready .portfolio-carousel-track { height: 300px; gap: .4rem; }
+  .portfolio-carousel.is-ready .portfolio-carousel-slide { height: 70%; }
+  .portfolio-carousel.is-ready .portfolio-carousel-slide.is-active { flex-grow: 5; height: 100%; }
+  .portfolio-carousel-arrow { width: 34px; height: 46px; font-size: 1.5rem; }
+  .portfolio-carousel-caption { font-size: .95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-carousel.is-ready .portfolio-carousel-slide,
+  .portfolio-carousel-progress span { transition: none; }
+}

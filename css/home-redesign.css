@@ -79,9 +79,53 @@ body.home-v2 {
   padding: clamp(6rem, 10vw, 9rem) 0 4rem;
 }
 
+.home-v2-hero-grid {
+  grid-template-areas:
+    "copy portrait"
+    "copy panel";
+  grid-template-rows: 1fr auto;
+  row-gap: 1.5rem;
+}
+
 .home-v2-hero-copy {
+  grid-area: copy;
   align-self: center;
   max-width: 800px;
+}
+
+.home-v2-hero-portrait {
+  grid-area: portrait;
+  align-self: end;
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  border-top: 3px solid #f59e0b;
+  box-shadow: 0 28px 70px rgba(0,0,0,.5);
+  background: #111318;
+}
+
+.home-v2-hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 62%;
+}
+
+.home-v2-hero-portrait figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1.6rem .9rem .7rem;
+  background: linear-gradient(180deg, transparent, rgba(9,10,13,.88));
+  color: #f6f7f9;
+  font-family: var(--font-display);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
 
 .home-v2-kicker {
@@ -137,6 +181,7 @@ body.home-v2 {
 }
 
 .home-v2-hero-panel {
+  grid-area: panel;
   align-self: end;
   margin-bottom: 1rem;
   background: rgba(10,11,15,.86);
@@ -538,6 +583,11 @@ body.home-v2 {
   .home-v2-hero-media { inset: 0; opacity: .46; }
   .home-v2-hero::before { background: linear-gradient(90deg, rgba(9,10,13,.97), rgba(9,10,13,.72)); }
   .home-v2-hero-panel { max-width: 520px; }
+  .home-v2-hero-grid {
+    grid-template-areas: "portrait" "copy" "panel";
+    grid-template-rows: auto;
+  }
+  .home-v2-hero-portrait { max-width: 520px; width: 100%; aspect-ratio: 16 / 11; }
   .home-v2-strip-grid { grid-template-columns: repeat(2,1fr); }
   .home-v2-strip-item:nth-child(2) { border-right: 0; }
   .home-v2-events-inner { grid-template-columns: 1fr; }
@@ -560,13 +610,14 @@ body.home-v2 {
   .home-v2-hero-grid {
     width: calc(100% - 2rem);
     min-width: 0;
-    min-height: calc(100svh - 68px);
-    padding: 3.4rem 0 1.4rem;
+    padding: 1.4rem 0 1.4rem;
     gap: 1.35rem;
     align-content: end;
     overflow: hidden;
   }
   .home-v2-hero-copy { align-self: end; min-width: 0; width: 100%; overflow: hidden; }
+  .home-v2-hero-portrait { max-width: none; aspect-ratio: 4 / 3; }
+  .home-v2-hero-portrait figcaption { padding: 1.2rem .75rem .55rem; font-size: .62rem; }
   .home-v2-kicker { margin-bottom: .7rem; font-size: .66rem; letter-spacing: .13em; }
   .home-v2-kicker::before { width: 26px; flex: 0 0 26px; }
   .home-v2-hero h1 {
