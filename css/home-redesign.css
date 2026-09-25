@@ -3,7 +3,7 @@
 /* Deadhang Labor LLC — homepage structural redesign */
 
 body.home-v2 {
-  --font-display: 'Barlow Condensed', sans-serif;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif-condensed, sans-serif;
   --font-body: 'Barlow', sans-serif;
   --font-mono: 'Barlow Condensed', sans-serif;
   background:
@@ -25,107 +25,62 @@ body.home-v2 {
 
 .home-v2-hero {
   position: relative;
-  min-height: calc(100vh - 76px);
+  padding: 0;
+  min-height: min(calc(100vh - 76px), 860px);
   display: grid;
-  align-items: stretch;
+  align-items: center;
   overflow: hidden;
   border-bottom: 1px solid rgba(255,255,255,.12);
   background: #090a0d;
 }
 
+/* Soft purple glow behind the headline only; nothing is laid over the photo. */
 .home-v2-hero::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: 0 50% 0 0;
   pointer-events: none;
-  background:
-    linear-gradient(115deg, rgba(9,10,13,.98) 0 38%, rgba(9,10,13,.82) 52%, rgba(9,10,13,.15) 78%),
-    radial-gradient(circle at 66% 20%, rgba(124,58,160,.20), transparent 30rem);
-  z-index: 2;
+  background: radial-gradient(circle at 30% 30%, rgba(124,58,160,.16), transparent 28rem);
+  z-index: 1;
 }
 
-.home-v2-hero::after {
-  content: '';
-  position: absolute;
-  inset: 22px;
-  pointer-events: none;
-  border: 1px solid rgba(255,255,255,.08);
-  clip-path: polygon(0 0, 110px 0, 110px 2px, 2px 2px, 2px 110px, 0 110px, 0 100%, 100% 100%, 100% calc(100% - 110px), calc(100% - 2px) calc(100% - 110px), calc(100% - 2px) calc(100% - 2px), calc(100% - 110px) calc(100% - 2px), calc(100% - 110px) 100%, 0 100%);
-  z-index: 4;
-}
-
+/* Owner photo as the hero background, right-hand side, lightly darkened. */
 .home-v2-hero-media {
   position: absolute;
-  inset: 0 0 0 38%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 0;
 }
 
 .home-v2-hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  filter: saturate(.76) contrast(1.08) brightness(.66);
+  object-position: 50% 45%;
+  filter: brightness(.9) contrast(1.04);
+}
+
+/* Blend the photo's left edge into the page so it has no hard seam. */
+.home-v2-hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #090a0d 0%, rgba(9,10,13,.75) 7%, rgba(9,10,13,.3) 17%, rgba(9,10,13,0) 28%);
 }
 
 .home-v2-hero-grid {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   width: min(100% - 3rem, 1240px);
   margin-inline: auto;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, .55fr);
-  gap: 4rem;
-  align-items: end;
-  padding: clamp(6rem, 10vw, 9rem) 0 4rem;
-}
-
-.home-v2-hero-grid {
-  grid-template-areas:
-    "copy portrait"
-    "copy panel";
-  grid-template-rows: 1fr auto;
-  row-gap: 1.5rem;
+  padding: clamp(4rem, 7vw, 6rem) 0 clamp(3rem, 5vw, 4.5rem);
 }
 
 .home-v2-hero-copy {
-  grid-area: copy;
-  align-self: center;
-  max-width: 800px;
-}
-
-.home-v2-hero-portrait {
-  grid-area: portrait;
-  align-self: end;
-  position: relative;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.16);
-  border-top: 3px solid #f59e0b;
-  box-shadow: 0 28px 70px rgba(0,0,0,.5);
-  background: #111318;
-}
-
-.home-v2-hero-portrait img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 40% 62%;
-}
-
-.home-v2-hero-portrait figcaption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1.6rem .9rem .7rem;
-  background: linear-gradient(180deg, transparent, rgba(9,10,13,.88));
-  color: #f6f7f9;
-  font-family: var(--font-display);
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  max-width: min(46vw, 620px);
 }
 
 .home-v2-kicker {
@@ -149,9 +104,8 @@ body.home-v2 {
 }
 
 .home-v2-hero h1 {
-  max-width: 780px;
-  font-size: clamp(3.8rem, 8.8vw, 7.5rem);
-  line-height: .88;
+  font-size: clamp(3rem, 5.9vw, 85px);
+  line-height: .9;
   letter-spacing: -.015em;
 }
 
@@ -167,10 +121,10 @@ body.home-v2 {
 }
 
 .home-v2-hero-lead {
-  max-width: 680px;
-  margin: 1.7rem 0 0;
+  max-width: 560px;
+  margin: 1.5rem 0 0;
   color: #c9cdd5;
-  font-size: clamp(1rem, 1.65vw, 1.18rem);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
 }
 
 .home-v2-hero-actions {
@@ -180,47 +134,42 @@ body.home-v2 {
   margin-top: 2rem;
 }
 
-.home-v2-hero-panel {
-  grid-area: panel;
-  align-self: end;
-  margin-bottom: 1rem;
-  background: rgba(10,11,15,.86);
-  border: 1px solid rgba(255,255,255,.14);
+/* Company profile row, directly under the hero. */
+.home-v2-profile {
+  padding: 0;
+  border-bottom: 1px solid rgba(255,255,255,.10);
   border-top: 3px solid #7c3aa0;
-  box-shadow: 0 28px 70px rgba(0,0,0,.45);
-  backdrop-filter: blur(12px);
+  background: #0b0c10;
 }
 
-.home-v2-panel-head {
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  color: #fbbf24;
-  font-family: var(--font-display);
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
+.home-v2-profile-grid {
+  width: min(100% - 3rem, 1240px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .home-v2-spec {
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 1rem;
-  padding: 1.05rem 1.2rem;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: 1.1rem 1.25rem;
+  border-right: 1px solid rgba(255,255,255,.08);
 }
 
-.home-v2-spec:last-child { border-bottom: 0; }
+.home-v2-spec:first-child { padding-left: 0; }
+.home-v2-spec:last-child { border-right: 0; }
 .home-v2-spec-label {
-  color: #777f8d;
+  color: #fbbf24;
   font-family: var(--font-display);
   font-size: .68rem;
-  letter-spacing: .11em;
+  font-weight: 700;
+  letter-spacing: .13em;
   text-transform: uppercase;
 }
 .home-v2-spec-value {
   color: #fff;
-  font-size: .92rem;
+  font-size: .95rem;
   font-weight: 600;
 }
 
@@ -574,20 +523,21 @@ body.home-v2 {
 .home-v2-cta-panel .btn { margin-top: 1.2rem; }
 
 @media (max-width: 980px) {
-  .home-v2-hero-grid,
   .home-v2-capability-layout,
   .home-v2-about-grid,
   .home-v2-section-head {
     grid-template-columns: 1fr;
   }
-  .home-v2-hero-media { inset: 0; opacity: .46; }
-  .home-v2-hero::before { background: linear-gradient(90deg, rgba(9,10,13,.97), rgba(9,10,13,.72)); }
-  .home-v2-hero-panel { max-width: 520px; }
-  .home-v2-hero-grid {
-    grid-template-areas: "portrait" "copy" "panel";
-    grid-template-rows: auto;
-  }
-  .home-v2-hero-portrait { max-width: 520px; width: 100%; aspect-ratio: 16 / 11; }
+  .home-v2-hero { display: block; min-height: 0; }
+  .home-v2-hero::before { inset: 0; }
+  .home-v2-hero-media { position: relative; width: 100%; height: clamp(320px, 62vw, 560px); }
+  .home-v2-hero-media::after { background: linear-gradient(0deg, #090a0d 0%, rgba(9,10,13,0) 30%); }
+  .home-v2-hero-grid { padding: 1.5rem 0 3rem; }
+  .home-v2-hero-copy { max-width: 720px; }
+  .home-v2-profile-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-v2-spec:nth-child(odd) { padding-left: 0; }
+  .home-v2-spec:nth-child(2) { border-right: 0; }
+  .home-v2-spec:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.08); }
   .home-v2-strip-grid { grid-template-columns: repeat(2,1fr); }
   .home-v2-strip-item:nth-child(2) { border-right: 0; }
   .home-v2-events-inner { grid-template-columns: 1fr; }
@@ -600,13 +550,8 @@ body.home-v2 {
 
 @media (max-width: 640px) {
   body.home-v2 { background-size: 28px 28px, 28px 28px, auto, auto; }
-  .home-v2-hero { min-height: auto; }
-  .home-v2-hero::after { inset: 10px; }
-  .home-v2-hero-media { inset: 0; opacity: .34; }
-  .home-v2-hero-media img { object-position: 62% center; filter: saturate(.7) contrast(1.05) brightness(.55); }
-  .home-v2-hero::before {
-    background: linear-gradient(180deg, rgba(9,10,13,.78) 0%, rgba(9,10,13,.92) 48%, #090a0d 100%);
-  }
+  .home-v2-hero-media { height: 300px; }
+  .home-v2-hero-media img { object-position: 45% 50%; }
   .home-v2-hero-grid {
     width: calc(100% - 2rem);
     min-width: 0;
@@ -616,8 +561,6 @@ body.home-v2 {
     overflow: hidden;
   }
   .home-v2-hero-copy { align-self: end; min-width: 0; width: 100%; overflow: hidden; }
-  .home-v2-hero-portrait { max-width: none; aspect-ratio: 4 / 3; }
-  .home-v2-hero-portrait figcaption { padding: 1.2rem .75rem .55rem; font-size: .62rem; }
   .home-v2-kicker { margin-bottom: .7rem; font-size: .66rem; letter-spacing: .13em; }
   .home-v2-kicker::before { width: 26px; flex: 0 0 26px; }
   .home-v2-hero h1 {
@@ -643,9 +586,8 @@ body.home-v2 {
   .home-v2-hero-lead { margin-top: .9rem; max-width: 100%; font-size: .93rem; line-height: 1.42; }
   .home-v2-hero-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; margin-top: 1.1rem; }
   .home-v2-hero-actions .btn { width: 100%; min-width: 0; min-height: 46px; padding-inline: .5rem; font-size: .72rem; }
-  .home-v2-hero-panel { margin: .15rem 0 0; max-width: none; min-width: 0; backdrop-filter: none; background: rgba(10,11,15,.94); }
-  .home-v2-panel-head { padding: .72rem .85rem; }
-  .home-v2-spec { grid-template-columns: 64px minmax(0,1fr); gap: .65rem; padding: .68rem .85rem; }
+  .home-v2-profile-grid { width: calc(100% - 2rem); }
+  .home-v2-spec { padding: .8rem .75rem; }
   .home-v2-spec-value { min-width: 0; font-size: .84rem; overflow-wrap: anywhere; }
 
   .home-v2-strip-grid { width: 100%; grid-template-columns: repeat(2,1fr); }
