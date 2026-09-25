@@ -50,7 +50,7 @@ body.home-v2 {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 50%;
+  width: 54%;
   z-index: 0;
 }
 
@@ -74,13 +74,13 @@ body.home-v2 {
 .home-v2-hero-grid {
   position: relative;
   z-index: 2;
-  width: min(100% - 3rem, 1240px);
-  margin-inline: auto;
+  margin-left: max(1.5rem, calc((100vw - 1240px) / 4));
+  margin-right: 1.5rem;
   padding: clamp(4rem, 7vw, 6rem) 0 clamp(3rem, 5vw, 4.5rem);
 }
 
 .home-v2-hero-copy {
-  max-width: min(46vw, 620px);
+  max-width: min(42vw, 620px);
 }
 
 .home-v2-kicker {
@@ -102,6 +102,8 @@ body.home-v2 {
   height: 2px;
   background: #f59e0b;
 }
+.home-v2-kicker .kicker-ivory { color: #cfcabd; }
+.home-v2-kicker .kicker-orange { color: #ff8a1f; }
 
 .home-v2-hero h1 {
   font-size: clamp(3rem, 5.9vw, 85px);
@@ -488,6 +490,7 @@ body.home-v2 {
   .home-v2-hero-media img { object-position: 45% 50%; }
   .home-v2-hero-grid {
     width: calc(100% - 2rem);
+    margin-inline: auto;
     min-width: 0;
     padding: 1.4rem 0 1.4rem;
     gap: 1.35rem;
