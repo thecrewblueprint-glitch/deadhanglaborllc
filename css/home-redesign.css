@@ -59,7 +59,7 @@ body.home-v2 {
   height: 100%;
   object-fit: cover;
   object-position: 50% 45%;
-  filter: brightness(.9) contrast(1.04);
+  filter: brightness(.72) contrast(1.04);
 }
 
 /* Blend the photo's left edge into the page so it has no hard seam. */
