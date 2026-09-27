@@ -251,11 +251,15 @@ body.home-v2 {
   font-size: .78rem;
   font-weight: 700;
   letter-spacing: .14em;
+  text-transform: uppercase;
 }
 .home-v2-section-title h2 {
   max-width: 760px;
   font-size: clamp(2.5rem, 5.4vw, 5rem);
 }
+/* What I do: unnumbered label at double size, title at 2/3 size */
+.home-v2-section-head--whatido .home-v2-section-index { font-size: 1.56rem; text-transform: uppercase; }
+.home-v2-section-head--whatido .home-v2-section-title h2 { font-size: clamp(1.67rem, 3.6vw, 3.33rem); }
 .home-v2-section-title p {
   max-width: 650px;
   margin-top: 1rem;
@@ -399,8 +403,9 @@ body.home-v2 {
   z-index: 1;
 }
 .home-v2-about-copy h2 {
-  font-size: clamp(2.7rem, 5.7vw, 5.4rem);
+  font-size: clamp(1.8rem, 3.8vw, 3.6rem);
 }
+.home-v2-about-copy .home-v2-section-index { font-size: 1.56rem; }
 .home-v2-about-copy .lead {
   margin: 1.2rem 0 2rem;
 }
@@ -548,6 +553,8 @@ body.home-v2 {
   .home-v2-section { padding: 3.25rem 1rem; }
   .home-v2-section-head { gap: .65rem; margin-bottom: 1.5rem; }
   .home-v2-section-index { font-size: .7rem; letter-spacing: .11em; }
+  .home-v2-section-head--whatido .home-v2-section-index { font-size: 1.4rem; }
+  .home-v2-section-head--whatido .home-v2-section-title h2 { font-size: clamp(1.57rem, 7.7vw, 2.3rem); }
   .home-v2-section-title h2 { font-size: clamp(2.35rem, 11.5vw, 3.45rem); line-height: .95; }
   .home-v2-section-title p { margin-top: .7rem; font-size: .95rem; line-height: 1.5; }
 
@@ -568,7 +575,8 @@ body.home-v2 {
   .home-v2-about-media { min-height: 0; aspect-ratio: 4/5; }
   .home-v2-about-media::before { inset: 10px -8px -10px 8px; }
   .home-v2-about-media img { object-fit: contain !important; object-position: center !important; background: #0d0f14; }
-  .home-v2-about-copy h2 { font-size: clamp(2.4rem, 11.5vw, 3.5rem); line-height: .94; }
+  .home-v2-about-copy h2 { font-size: clamp(1.6rem, 7.7vw, 2.33rem); line-height: .94; }
+  .home-v2-about-copy .home-v2-section-index { font-size: 1.4rem; }
   .home-v2-about-copy .lead { margin: .8rem 0 1.4rem; font-size: .98rem; line-height: 1.45; }
   .home-v2-about-points { gap: 0; margin-bottom: 1.35rem; }
   .home-v2-about-point { grid-template-columns: 28px 1fr; gap: .7rem; padding: .8rem 0; }
