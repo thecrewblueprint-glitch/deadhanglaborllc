@@ -256,6 +256,9 @@ body.home-v2 {
   max-width: 760px;
   font-size: clamp(2.5rem, 5.4vw, 5rem);
 }
+/* What I do: unnumbered label at double size, title at 2/3 size */
+.home-v2-section-head--whatido .home-v2-section-index { font-size: 1.56rem; text-transform: uppercase; }
+.home-v2-section-head--whatido .home-v2-section-title h2 { font-size: clamp(1.67rem, 3.6vw, 3.33rem); }
 .home-v2-section-title p {
   max-width: 650px;
   margin-top: 1rem;
@@ -548,6 +551,8 @@ body.home-v2 {
   .home-v2-section { padding: 3.25rem 1rem; }
   .home-v2-section-head { gap: .65rem; margin-bottom: 1.5rem; }
   .home-v2-section-index { font-size: .7rem; letter-spacing: .11em; }
+  .home-v2-section-head--whatido .home-v2-section-index { font-size: 1.4rem; }
+  .home-v2-section-head--whatido .home-v2-section-title h2 { font-size: clamp(1.57rem, 7.7vw, 2.3rem); }
   .home-v2-section-title h2 { font-size: clamp(2.35rem, 11.5vw, 3.45rem); line-height: .95; }
   .home-v2-section-title p { margin-top: .7rem; font-size: .95rem; line-height: 1.5; }
 
