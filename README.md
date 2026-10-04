@@ -17,8 +17,8 @@ The source code, branding, graphics, images, documentation, and website content 
 This repository uses GitHub Actions + GitHub Pages as the deployment path for the public static site.
 
 - Accepted production state is `main`.
-- Website changes are **PR-first**: work branch → pull request → merge to `main`.
-- `.github/workflows/pages.yml` deploys only after a pull request targeting `main` is merged, or through an explicit manual workflow dispatch.
+- Website changes are **PR-first**: work branch → pull request → validation → merge to `main`.
+- `.github/workflows/pages.yml` validates proposed pull requests targeting `main`, then deploys the accepted `main` state on pushes to `main` or through an explicit manual workflow dispatch.
 - `CNAME` maps the Pages site to `deadhanglaborllc.com`.
 - GitHub Pages is currently retained because it provides the HTTPS deployment path used by the custom domain.
 - Any separate cPanel/hosting account is outside this repository's current build/deploy authority unless explicitly reactivated as the production target later.
