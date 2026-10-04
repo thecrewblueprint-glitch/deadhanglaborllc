@@ -133,7 +133,7 @@ document.addEventListener("keydown", (event) => {
   notice.setAttribute('role', 'region');
   notice.setAttribute('aria-label', 'Cookie notice');
   notice.innerHTML =
-    '<p>This site uses essential cookies and browser storage for basic functionality only. No tracking or advertising cookies are used. <a href="cookies.html">Learn more</a></p>' +
+    '<p>This site uses browser storage only to remember that you dismissed this notice. No tracking or advertising cookies are used. <a href="cookies.html">Learn more</a></p>' +
     '<button type="button" class="cookie-notice-dismiss">Got it</button>';
   document.body.appendChild(notice);
   notice.querySelector('.cookie-notice-dismiss').addEventListener('click', function () {
