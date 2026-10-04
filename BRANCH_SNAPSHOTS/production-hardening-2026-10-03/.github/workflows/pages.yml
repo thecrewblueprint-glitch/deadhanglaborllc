@@ -1,0 +1,180 @@
+name: Validate and deploy static site to GitHub Pages
+
+on:
+  pull_request:
+    branches: ["main"]
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout proposed state
+        uses: actions/checkout@v4
+
+      - name: Build clean Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          rsync -a \
+            --exclude='_site/' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.claude/' \
+            --exclude='preview/' \
+            --exclude='*.zip' \
+            --exclude='AGENTS.md' \
+            --exclude='README.md' \
+            --exclude='LICENSE' \
+            --exclude='.htaccess' \
+            --exclude='_ref-*' \
+            ./ _site/
+
+      - name: Validate production artifact
+        shell: python
+        run: |
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          import json
+          import re
+          import sys
+
+          root = Path("_site").resolve()
+          required = [
+              "index.html",
+              "about.html",
+              "portfolio.html",
+              "services.html",
+              "contact.html",
+              "privacy.html",
+              "cookies.html",
+              "terms.html",
+              "404.html",
+              "CNAME",
+              "robots.txt",
+              "sitemap.xml",
+              "site.webmanifest",
+              ".nojekyll",
+          ]
+
+          errors = []
+          for rel in required:
+              if not (root / rel).exists():
+                  errors.append(f"missing required production file: {rel}")
+
+          forbidden = list(root.rglob("*.zip"))
+          if forbidden:
+              errors.extend(f"archive leaked into production artifact: {p.relative_to(root)}" for p in forbidden)
+
+          for forbidden_dir in (".git", ".github", ".claude", "preview"):
+              if (root / forbidden_dir).exists():
+                  errors.append(f"non-production directory leaked into artifact: {forbidden_dir}")
+
+          attr_re = re.compile(r'\b(?:href|src)\s*=\s*["\']([^"\']+)["\']', re.I)
+          css_url_re = re.compile(r'url\(\s*["\']?([^)"\']+)["\']?\s*\)', re.I)
+
+          def check_target(source: Path, raw: str):
+              raw = raw.strip()
+              if not raw or raw.startswith(("#", "mailto:", "tel:", "data:", "//")):
+                  return
+              parts = urlsplit(raw)
+              if parts.scheme:
+                  return
+              path = parts.path
+              if not path:
+                  return
+              if path.startswith("/"):
+                  target = root / path.lstrip("/")
+              else:
+                  target = source.parent / path
+              target = target.resolve()
+              try:
+                  target.relative_to(root)
+              except ValueError:
+                  errors.append(f"{source.relative_to(root)} points outside artifact: {raw}")
+                  return
+              if path.endswith("/"):
+                  target = target / "index.html"
+              if not target.exists():
+                  errors.append(f"{source.relative_to(root)} has missing local target: {raw}")
+
+          for html in root.rglob("*.html"):
+              text = html.read_text(encoding="utf-8-sig")
+              for raw in attr_re.findall(text):
+                  check_target(html, raw)
+
+          for css in root.rglob("*.css"):
+              text = css.read_text(encoding="utf-8-sig")
+              for raw in css_url_re.findall(text):
+                  check_target(css, raw)
+
+          manifest_path = root / "site.webmanifest"
+          if manifest_path.exists():
+              manifest = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
+              for icon in manifest.get("icons", []):
+                  src = icon.get("src")
+                  if src:
+                      check_target(manifest_path, src)
+
+          if errors:
+              print("\n".join(f"ERROR: {e}" for e in errors))
+              sys.exit(1)
+
+          print("Production artifact validation passed.")
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout accepted main
+        uses: actions/checkout@v4
+
+      - name: Build clean Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          rsync -a \
+            --exclude='_site/' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.claude/' \
+            --exclude='preview/' \
+            --exclude='*.zip' \
+            --exclude='AGENTS.md' \
+            --exclude='README.md' \
+            --exclude='LICENSE' \
+            --exclude='.htaccess' \
+            --exclude='_ref-*' \
+            ./ _site/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload production artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
