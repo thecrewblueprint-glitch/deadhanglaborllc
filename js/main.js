@@ -96,23 +96,34 @@ lightbox?.addEventListener("click", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeLightbox();
+    return;
+  }
+
+  if (event.key !== "Tab" || !lightbox || lightbox.hidden) return;
+
+  const focusable = Array.from(
+    lightbox.querySelectorAll(
+      'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => !element.hidden && element.getAttribute("aria-hidden") !== "true");
+
+  if (focusable.length === 0) {
+    event.preventDefault();
+    lightboxClose?.focus();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
   }
 });
-
-// Activate the homepage resume control using the original PDF bytes stored in resume-pdf.js.
-const resumePlaceholder = document.querySelector('.home-contact-resume-pending');
-if (resumePlaceholder) {
-  const resumeButton = document.createElement('button');
-  resumeButton.id = 'resumePdfButton';
-  resumeButton.type = 'button';
-  resumeButton.className = 'btn btn-outline btn-lg';
-  resumeButton.textContent = 'Resume PDF';
-  resumePlaceholder.replaceWith(resumeButton);
-
-  const resumeScript = document.createElement('script');
-  resumeScript.src = 'js/resume-pdf.js?v=20260908-1';
-  document.body.appendChild(resumeScript);
-}
 
 // Cookie notice
 (function () {

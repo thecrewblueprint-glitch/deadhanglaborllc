@@ -25,7 +25,7 @@ Rules:
 - Do not make routine website changes directly on `main`.
 - `main` is accepted production state.
 - Work branches and pull requests are proposed state.
-- `.github/workflows/pages.yml` deploys the site after a PR targeting `main` is merged; it no longer deploys on every direct push to `main`.
+- `.github/workflows/pages.yml` validates pull requests targeting `main` and deploys the accepted `main` state on pushes to `main`; direct pushes remain prohibited by process even though the deploy path keeps production synchronized if one occurs.
 - Manual workflow dispatch is reserved for an explicit deployment action.
 - GitHub branch-protection settings should enforce the same PR-first rule when technically available; the process rule applies even if the repository setting is temporarily absent.
 
