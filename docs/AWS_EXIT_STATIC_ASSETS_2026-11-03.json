@@ -1,0 +1,356 @@
+{
+  "schema_version": "deadhang-aws-static-asset-inventory/1.0.0",
+  "source_repository": "thecrewblueprint-glitch/deadhanglaborllc",
+  "source_branch": "main",
+  "source_commit": "35bd95f9404ffecae4024f9438579ebfd20c7f67",
+  "audit_scope": "tracked primary HTML, CSS and JS pages only, not AWS account inventory",
+  "snapshot_date": "2026-11-03",
+  "cdn_hostname": "djrzj431udyjd.cloudfront.net",
+  "source_files_scanned": [
+    "index.html",
+    "about.html",
+    "portfolio.html",
+    "services.html",
+    "contact.html",
+    "css/style.css",
+    "css/home-redesign.css",
+    "css/portfolio-carousel.css",
+    "js/main.js",
+    "js/portfolio-carousel.js",
+    "privacy.html",
+    "cookies.html",
+    "terms.html",
+    "404.html"
+  ],
+  "files_with_aws_dependencies": [
+    {
+      "path": "index.html",
+      "aws_url_count": 2
+    },
+    {
+      "path": "about.html",
+      "aws_url_count": 2
+    },
+    {
+      "path": "portfolio.html",
+      "aws_url_count": 31
+    },
+    {
+      "path": "services.html",
+      "aws_url_count": 1
+    },
+    {
+      "path": "contact.html",
+      "aws_url_count": 1
+    }
+  ],
+  "unique_external_urls": 33,
+  "asset_rows": [
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/about-teaser.jpg",
+      "filename": "about-teaser.jpg",
+      "referenced_by": [
+        "about.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-1.jpg",
+      "filename": "arena-1.jpg",
+      "referenced_by": [
+        "portfolio.html",
+        "contact.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-2.jpg",
+      "filename": "arena-2.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-3.jpg",
+      "filename": "arena-3.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-4.jpg",
+      "filename": "arena-4.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-5.jpg",
+      "filename": "arena-5.jpg",
+      "referenced_by": [
+        "portfolio.html",
+        "services.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-6.jpg",
+      "filename": "arena-6.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-7.jpg",
+      "filename": "arena-7.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-8.jpg",
+      "filename": "arena-8.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/arena-9.jpg",
+      "filename": "arena-9.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/country-thunder-wisconsin-1.jpg",
+      "filename": "country-thunder-wisconsin-1.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/country-thunder-wisconsin-2.jpg",
+      "filename": "country-thunder-wisconsin-2.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/country-thunder-wisconsin-3.jpg",
+      "filename": "country-thunder-wisconsin-3.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/country-thunder-wisconsin-4.jpg",
+      "filename": "country-thunder-wisconsin-4.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/country-thunder-wisconsin-5.jpg",
+      "filename": "country-thunder-wisconsin-5.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-1.jpg",
+      "filename": "festival-1.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-10.jpg",
+      "filename": "festival-10.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-11.jpg",
+      "filename": "festival-11.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-12.jpg",
+      "filename": "festival-12.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-2.jpg",
+      "filename": "festival-2.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-3.jpg",
+      "filename": "festival-3.jpg",
+      "referenced_by": [
+        "about.html",
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-4.jpg",
+      "filename": "festival-4.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-5.jpg",
+      "filename": "festival-5.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-7.jpg",
+      "filename": "festival-7.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-8.jpg",
+      "filename": "festival-8.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/festival-9.jpg",
+      "filename": "festival-9.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/headshot.jpg",
+      "filename": "headshot.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/hero-bg.jpg",
+      "filename": "hero-bg.jpg",
+      "referenced_by": [
+        "index.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/portfolio-1.jpg",
+      "filename": "portfolio-1.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/spotlight-1.jpg",
+      "filename": "spotlight-1.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/spotlight-4.jpg",
+      "filename": "spotlight-4.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/spotlight-5.jpg",
+      "filename": "spotlight-5.jpg",
+      "referenced_by": [
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    },
+    {
+      "url": "https://djrzj431udyjd.cloudfront.net/spotlight-6.jpg",
+      "filename": "spotlight-6.jpg",
+      "referenced_by": [
+        "index.html",
+        "portfolio.html"
+      ],
+      "exact_local_filename_match": null,
+      "recovery_state": "NOT_COPIED_OR_VERIFIED"
+    }
+  ],
+  "completeness": "SITE_SOURCE_PARTIAL_ONLY",
+  "remote_downloads_verified": false,
+  "aws_account_verified": false,
+  "cutover_authorized": false,
+  "decommission_authorized": false
+}
