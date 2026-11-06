@@ -17,6 +17,12 @@ jobs:
       - name: Checkout proposed state
         uses: actions/checkout@v4
 
+      - name: Run offline AWS-reference safety tests
+        run: python -m unittest discover -s .github/tests -p 'test_*.py' -v
+
+      - name: Refuse unreviewed new AWS site dependencies
+        run: python .github/scripts/aws_reference_gate.py
+
       - name: Build clean Pages artifact
         shell: bash
         run: |
