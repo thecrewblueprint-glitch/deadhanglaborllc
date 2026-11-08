@@ -2,6 +2,7 @@ name: Validate and deploy static site to GitHub Pages
 
 on:
   pull_request:
+    types: [ready_for_review]
     branches: ["main"]
   push:
     branches: ["main"]
