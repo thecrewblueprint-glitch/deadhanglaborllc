@@ -5,7 +5,7 @@
 
   button.addEventListener('click', function () {
     const link = document.createElement('a');
-    link.href = 'assets/Aaron_Bowman_Deadhang_Labor_Travel_Resume.pdf';
+    link.href = 'assets/Aaron_Bowman_Deadhang_Labor_Travel_Resume_2026-11-17.pdf';
     link.download = 'Aaron_Bowman_Resume_Deadhang_Public.pdf';
     document.body.appendChild(link);
     link.click();
