@@ -2,7 +2,7 @@ name: Validate and deploy static site to GitHub Pages
 
 on:
   pull_request:
-    types: [ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review]
     branches: ["main"]
   push:
     branches: ["main"]
@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Checkout proposed state
         uses: actions/checkout@v4
+
+      - name: Run offline AWS-reference safety tests
+        run: python -m unittest discover -s .github/tests -p 'test_*.py' -v
+
+      - name: Refuse unreviewed new AWS site dependencies
+        run: python .github/scripts/aws_reference_gate.py
 
       - name: Build clean Pages artifact
         shell: bash

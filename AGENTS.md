@@ -48,7 +48,7 @@ Write access to this repository itself likewise requires owner authorization. Te
 ## Public-data boundary
 
 - Keep this repository public-facing only.
-- **Contact rule (owner decision, 2026-09-25):** the only contact method shown anywhere on the website is email to `aaron@deadhanglaborllc.com`. Never put the owner's personal email (`aaronbowman84@…`) or personal phone number on any page, in page metadata, or in site code.
+- **Contact rule (owner decision, 2026-09-25):** the only contact method shown anywhere on the website is email to `deadhanglaborllc@gmail.com`. Never put the owner's personal email (`aaronbowman84@…`) or personal phone number on any page, in page metadata, or in site code.
 - The owner's phone number may appear **only inside the resume PDF**, and there it must be labeled as text-preferred (for example "Text preferred — often on site and unable to take calls"). The personal email does not belong in the resume PDF either.
 - Do not add contractor tools, private documents, API keys, `.env` files, database dumps, financial records, client records, or PII.
 - Future contractor portals or admin dashboards belong in separate private repositories.
