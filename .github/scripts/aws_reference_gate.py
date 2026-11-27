@@ -8,9 +8,11 @@ After cutover use --require-zero to forbid all AWS references in first-party sit
 """
 import argparse
 import json
+import hashlib
 import re
 from pathlib import Path
 from urllib.parse import urlsplit
+from aws_artifact_gate import audit_artifact
 
 AWS_URL = re.compile(
     r"(?:(?:https?:)?//)(?:[A-Za-z0-9-]+\.)*(?:cloudfront\.net|amazonaws\.com)(?:/[^\s\"'<>)]*)?",
@@ -67,10 +69,36 @@ def main(argv=None):
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2])
     p.add_argument("--require-zero", action="store_true",
                    help="Owner-approved post-cutover gate; NOT expected to pass before migration")
+    p.add_argument("--artifact-root", type=Path, help="Already built Pages artifact (offline)")
+    p.add_argument("--reviewed-manifest", type=Path, help="Independently reviewed public file manifest")
+    p.add_argument("--manifest-sha256", help="Exact manifest file digest from independent review")
     args = p.parse_args(argv)
     root = args.root.resolve()
     inventory = json.loads((root / "docs/AWS_EXIT_STATIC_ASSETS_2026-11-03.json").read_text(encoding="utf-8"))
-    result = audit(inventory, scan(root), args.require_zero)
+    if any((args.artifact_root, args.reviewed_manifest, args.manifest_sha256)):
+        if not all((args.artifact_root, args.reviewed_manifest, args.manifest_sha256)):
+            p.error("Artifact mode requires directory, independent manifest and digest")
+        try:
+            manifest_path = args.reviewed_manifest.resolve(strict=True)
+            if manifest_path.is_relative_to(args.artifact_root.resolve()):
+                raise ValueError("Manifest must not be part of artifact")
+            with manifest_path.open("rb") as handle:
+                raw = handle.read(4 * 1024 * 1024 + 1)
+            if len(raw) > 4 * 1024 * 1024 or hashlib.sha256(raw).hexdigest() != args.manifest_sha256:
+                raise ValueError("Manifest digest mismatch")
+            def unique(pairs):
+                result = {}
+                for key, value in pairs:
+                    if key in result:
+                        raise ValueError("Duplicate manifest key")
+                    result[key] = value
+                return result
+            manifest = json.loads(raw, object_pairs_hook=unique)
+            result = audit_artifact(args.artifact_root, manifest, inventory, require_zero=args.require_zero)
+        except (OSError, ValueError, TypeError, RecursionError):
+            p.error("Reviewed artifact audit refused; inspect private inputs")
+    else:
+        result = audit(inventory, scan(root), args.require_zero)
     print(json.dumps(result, indent=2))
     return 0 if result["ok"] else 1
 
