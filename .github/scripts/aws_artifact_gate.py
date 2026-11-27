@@ -1,0 +1,88 @@
+"""Offline audit of an already-built, explicitly reviewed public Pages artifact.
+No source-tree discovery, network calls, credential reads, or publication.
+Run after the existing Pages build and before any release approval.
+"""
+import hashlib
+import html
+import json
+import re
+from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
+
+TEXT = {'.html','.htm','.css','.js','.mjs','.cjs','.json','.webmanifest','.xml','.svg','.txt','.md','.map','.yaml','.yml','.csv','.rss','.atom'}
+TEXT_NAMES = {'CNAME','.nojekyll','robots.txt'}
+BINARY = {'.jpg','.jpeg','.png','.gif','.webp','.avif','.ico','.woff','.woff2','.ttf','.otf'}
+FORBIDDEN = {'.git','.github','.claude','preview','credentials','secrets','node_modules','__pycache__','_site'}
+URL = re.compile(r'(?:(?:https?:)?//)(?:[A-Za-z0-9-]+\.)*(?:cloudfront\.net|amazonaws\.com)(?=[:/\s"\'<>?#),;]|$)(?:[^\s"\'<>),;]*)',re.I)
+HOST = re.compile(r'(?:[A-Za-z0-9-]+\.)*(?:cloudfront\.net|amazonaws\.com)',re.I)
+MAX_FILE = 16 * 1024 * 1024
+
+
+def safe_path(path):
+    if not isinstance(path,str) or not path or len(path)>1024 or '\\' in path or ':' in path or any(ord(c)<32 or ord(c)==127 for c in path):
+        return False
+    parts=path.split('/')
+    return all(p not in {'','.','..'} and p==p.strip() and p.casefold() not in FORBIDDEN for p in parts) and not any(p.casefold().startswith('.env') for p in parts)
+
+
+def classify(path):
+    p=PurePosixPath(path)
+    if p.name in TEXT_NAMES or p.suffix.lower() in TEXT:return 'text'
+    if p.suffix.lower() in BINARY:return 'binary'
+    raise ValueError('Unreviewed deployed file type')
+
+
+def normalized_url(raw):
+    raw='https:'+raw if raw.startswith('//') else raw
+    try:
+        u=urlsplit(raw)
+        if u.scheme not in {'http','https'} or not u.hostname or not HOST.fullmatch(u.hostname) or u.username is not None or u.password is not None or u.port is not None:
+            raise ValueError('Unreviewed URL form')
+    except ValueError:
+        raise ValueError('Unreviewed AWS URL form') from None
+    return u._replace(netloc=u.hostname.lower()).geturl()
+
+
+def audit_artifact(root, manifest, inventory, *, require_zero=False):
+    """Manifest is an independently reviewed path/SHA-256 list of public bytes.
+    Binary image/font entries are hash-checked only; dynamic runtime references
+    and opaque binary payload semantics require separate release evidence.
+    """
+    root=Path(root)
+    if root.is_symlink() or not root.is_dir():raise ValueError('Artifact directory required')
+    if not isinstance(manifest,list) or not manifest:raise ValueError('Reviewed manifest required')
+    expected={}; kinds={}; folded=set()
+    for row in manifest:
+        if not isinstance(row,dict) or set(row)!={'path','sha256'}:raise ValueError('Invalid manifest entry')
+        path=row['path']; sha=row['sha256']
+        if not safe_path(path) or path.casefold() in folded or not isinstance(sha,str) or not re.fullmatch('[0-9a-f]{64}',sha):raise ValueError('Unsafe or duplicate manifest path')
+        kinds[path]=classify(path);expected[path]=sha;folded.add(path.casefold())
+    actual={}
+    for file in root.rglob('*'):
+        path=file.relative_to(root).as_posix()
+        if file.is_symlink() or not safe_path(path):raise ValueError('Unsafe deployed path')
+        if file.is_dir():continue
+        if not file.is_file():raise ValueError('Unexpected artifact entry')
+        actual[path]=file
+    # Do not read anything before the complete path inventory has been checked.
+    if set(actual)!=set(expected):raise ValueError('Artifact manifest coverage mismatch')
+    if not isinstance(inventory,dict) or inventory.get('schema_version')!='deadhang-aws-static-asset-inventory/1.0.0':raise ValueError('Invalid baseline')
+    rows=inventory.get('asset_rows')
+    if not isinstance(rows,list) or len(rows)!=inventory.get('unique_external_urls'):raise ValueError('Invalid baseline coverage')
+    known=set()
+    for row in rows:
+        if not isinstance(row,dict) or not isinstance(row.get('url'),str):raise ValueError('Invalid baseline URL')
+        known.add(normalized_url(row['url']))
+    if len(known)!=len(rows):raise ValueError('Duplicate baseline URL')
+    seen={}; opaque=0
+    for path,file in sorted(actual.items()):
+        if file.stat().st_size>MAX_FILE:raise ValueError('Artifact file exceeds reviewed bound')
+        with file.open('rb') as fh:data=fh.read(MAX_FILE+1)
+        if len(data)>MAX_FILE or hashlib.sha256(data).hexdigest()!=expected[path]:raise ValueError('Artifact digest mismatch')
+        if kinds[path]=='binary':opaque+=1;continue
+        try:s=html.unescape(data.decode('utf-8-sig')).replace(r'\/','/')
+        except UnicodeError:raise ValueError('Undecodable public text') from None
+        for match in URL.finditer(s):
+            url=normalized_url(match.group());seen.setdefault(url,set()).add(path)
+    extra=set(seen)-known
+    return {'ok':not extra and not(require_zero and seen),'artifact_files':len(actual),'text_scanned':len(actual)-opaque,'binary_hash_only':opaque,'known_urls_remaining':len(set(seen)&known),'unapproved_urls':len(extra),'zero_aws_refs':not seen,'scope':'literal static URL scan of exact manifest; dynamic references not verified','production_authority':False}
